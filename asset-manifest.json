@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/cups-generator/static/css/main.54547661.css",
-    "main.js": "/cups-generator/static/js/main.6c6c6fb6.js",
+    "main.js": "/cups-generator/static/js/main.767cd130.js",
     "index.html": "/cups-generator/index.html",
     "main.54547661.css.map": "/cups-generator/static/css/main.54547661.css.map",
-    "main.6c6c6fb6.js.map": "/cups-generator/static/js/main.6c6c6fb6.js.map"
+    "main.767cd130.js.map": "/cups-generator/static/js/main.767cd130.js.map"
   },
   "entrypoints": [
     "static/css/main.54547661.css",
-    "static/js/main.6c6c6fb6.js"
+    "static/js/main.767cd130.js"
   ]
 }

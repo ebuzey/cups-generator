@@ -1,47 +1,32 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import Button from './Button';
 
 function Cups() {
   const [cups, setCups] = useState('');
   const [copied, setCopied] = useState(false);
 
-  const generarCups = useCallback((distribuidora = "0000", pais = "ES", ntOpcional = false) => {
-    const generarParteNumerica = (distribuidora) => {
-      const numeroSuministro = Math.floor(Math.random() * 1e12).toString().padStart(12, '0');
-      return distribuidora + numeroSuministro;
-    };
+  const alphabet = "TRWAGMYFPDXBNJZSQVHLCKE";
 
-    const calcularCaracteresControl = (numero) => {
-      const tablaEquivalencia = "TRWAGMYFPDXBNJZSQVHLCKE";
-      const numeroEntero = parseInt(numero, 10);
-      const R0 = numeroEntero % 529;
-      const C = Math.floor(R0 / 23);
-      const R = R0 % 23;
-      return tablaEquivalencia[C] + tablaEquivalencia[R];
-    };
+  const generarParteNumerica = () => {
+    // Simulamos el código de la distribuidora como "1234" y generamos un número aleatorio para el identificador
+    const distribuidora = "1234";
+    const numeroSuministro = Math.floor(Math.random() * 1e12).toString().padStart(12, '0');
+    return distribuidora + numeroSuministro;
+  };
 
-    const parteNumerica = generarParteNumerica(distribuidora);
+  const calcularCaracteresControl = (parteNumerica) => {
+    const numeroEntero = BigInt(parteNumerica);
+    const R0 = numeroEntero % 529n;
+    const C = R0 / 23n;
+    const R = R0 % 23n;
+    return alphabet[Number(C)] + alphabet[Number(R)];
+  };
+
+  const generarCups = () => {
+    const parteNumerica = generarParteNumerica();
     const caracteresControl = calcularCaracteresControl(parteNumerica);
-    let cups = `${pais} ${distribuidora} ${parteNumerica.substring(0, 4)} ${parteNumerica.substring(4, 8)} ${parteNumerica.substring(8, 12)} ${caracteresControl}`;
-    if (ntOpcional) {
-      const n = Math.floor(Math.random() * 10);
-      const opcionesT = ['F', 'P', 'R', 'C', 'X', 'Y', 'Z'];
-      const t = opcionesT[Math.floor(Math.random() * opcionesT.length)];
-      cups += ` ${n} ${t}`;
-    }
-    return cups;
-  }, []);
-
-  useEffect(() => {
-    // Generar el CUPS inicial cuando el componente se monte por primera vez
-    const nuevoCups = generarCups("1234", "ES", true);
-    setCups(nuevoCups);
-  }, [generarCups]);
-
-  const handleGenerarCups = () => {
-    const nuevoCups = generarCups("1234", "ES", true);
-    setCups(nuevoCups);
-    setCopied(false);
+    const cupsFormateado = `ES${parteNumerica}${caracteresControl}`;
+    setCups(cupsFormateado);
   };
 
   const handleCopyToClipboard = () => {
@@ -54,12 +39,10 @@ function Cups() {
       <header className="App-header">
         <div>
           <input type="text" value={cups} readOnly style={{ width: '400px', height: '60px', padding: '8px', marginRight: '8px', fontSize: '20px' }} />
-          {/* Botón para copiar al portapapeles */}
           <button onClick={handleCopyToClipboard} style={{ backgroundColor: 'white', color: 'black', padding: '8px', border: '1px solid black', cursor: 'pointer', width: '100px', height: '60px', fontSize: '20px' }}>Copiar</button>
-          {/* Mostrar mensaje de copiado */}
           {copied && <p style={{ color: 'white' }}>¡CUPS copiado al portapapeles!</p>}
         </div>
-        <Button onClick={handleGenerarCups} text="Generar CUPS" />
+        <Button onClick={generarCups} text="Generar CUPS" />
       </header>
     </div>
   );

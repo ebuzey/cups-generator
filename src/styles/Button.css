@@ -20,3 +20,11 @@ button:hover.clic-button {
     background-color: #03396c;
 }
 
+@media (max-width: 600px) {
+    button {
+      width: 200px;
+      height: 60px;
+      font-size: 20px;
+      margin: 10px 0;
+    }
+  }

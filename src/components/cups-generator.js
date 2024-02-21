@@ -1,12 +1,12 @@
 /* global BigInt */
 import React, { useState, useEffect } from 'react';
 import Button from './Button';
+import '../styles/CupsGenerator.css'
 
 function Cups() {
   const [cups, setCups] = useState('');
   const [copied, setCopied] = useState(false);
 
-  // Movemos la definición de las funciones aquí para evitar la dependencia en useEffect
   const alphabet = "TRWAGMYFPDXBNJZSQVHLCKE";
 
   const generarParteNumerica = () => {
@@ -31,7 +31,6 @@ function Cups() {
   };
 
   useEffect(() => {
-    // Generar un CUPS inicial al cargar la página
     generarCups();
   }, []);
 
@@ -41,16 +40,16 @@ function Cups() {
   };
 
   const handleGenerarCups = () => {
-    generarCups(); // Llama a generarCups para generar un nuevo CUPS
-    setCopied(false); // Restablece el estado de copied al generar un nuevo CUPS
+    generarCups();
+    setCopied(false);
   };
 
   return (
     <div className="App">
       <header className="App-header">
         <div>
-          <input type="text" value={cups} readOnly style={{ width: '400px', height: '60px', padding: '8px', marginRight: '8px', fontSize: '20px' }} />
-          <button onClick={handleCopyToClipboard} style={{ backgroundColor: 'white', color: 'black', padding: '8px', border: '1px solid black', cursor: 'pointer', width: '100px', height: '60px', fontSize: '20px' }}>Copiar</button>
+          <input type="text" value={cups} readOnly className="cups-input" />
+          <button onClick={handleCopyToClipboard} className="copy-button">Copiar</button>
           {copied && <p style={{ color: 'white' }}>¡CUPS copiado al portapapeles!</p>}
         </div>
         <Button onClick={handleGenerarCups} text="Generar CUPS" />

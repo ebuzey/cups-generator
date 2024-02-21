@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/cups-generator/static/css/main.54547661.css",
+    "main.js": "/cups-generator/static/js/main.767cd130.js",
+    "index.html": "/cups-generator/index.html",
+    "main.54547661.css.map": "/cups-generator/static/css/main.54547661.css.map",
+    "main.767cd130.js.map": "/cups-generator/static/js/main.767cd130.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.54547661.css",
+    "static/js/main.767cd130.js"
+  ]
+}
